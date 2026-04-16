@@ -1109,24 +1109,22 @@ tailwind.config = {
   function updateNav(idx){
     const items = document.querySelectorAll('.nav-item');
     items.forEach((el,i)=>{
+      // Clear all inline styles first so classes take effect cleanly
+      el.style.cssText = '';
       if(i===idx){
         el.dataset.active = 'true';
-        el.className = 'nav-item flex flex-col items-center justify-center rounded-full w-14 h-14 -mt-4 shadow-lg active:scale-90 duration-300 ease-out tap';
-        el.style.background = 'linear-gradient(135deg,#00123e,#00246a)';
-        el.style.color = '#fff';
-        // Remove text label for active pill
+        el.className = 'nav-item flex flex-col items-center justify-center active:scale-90 duration-300 ease-out tap';
+        el.style.cssText = 'background:linear-gradient(135deg,#00123e,#00246a);color:#fff;width:3.5rem;height:3.5rem;border-radius:9999px;margin-top:-1rem;box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1);';
         const label = el.querySelector('.font-label');
         if(label) label.style.display = 'none';
         el.querySelector('.material-symbols-outlined').classList.add('mat-filled');
       } else {
         el.dataset.active = 'false';
         el.className = 'nav-item flex flex-col items-center justify-center gap-1 active:scale-90 duration-300 ease-out tap';
-        el.style.background = 'none';
-        el.style.color = 'rgba(30,27,24,.45)';
-        el.style.width = 'auto'; el.style.height = 'auto'; el.style.marginTop = '0'; el.style.boxShadow = 'none'; el.style.borderRadius = '0';
         const label = el.querySelector('.font-label');
         if(label) label.style.display = '';
         el.querySelector('.material-symbols-outlined').classList.remove('mat-filled');
+        el.style.color = 'rgba(30,27,24,.45)';
       }
     });
   }
